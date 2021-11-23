@@ -1,6 +1,7 @@
 @extends('layout.master')
 
 @section('content')
+
 <form action="{{ route('galeri.store') }}" method="post" enctype="multipart/form-data">
     @csrf
         <div class="form-group">
@@ -29,4 +30,5 @@
             <a href="/galeri" class="btn btn-warning"> Batal </a>
         </div>
 </form>
+
 @endsection

@@ -8,26 +8,31 @@ use App\Buku;
 use Intervention\Image\Facades\Image As Image;
 use Illuminate\Support\Str;
 
-use File;
-use PhpParser\Node\Expr\New_;
-
 class GaleriController extends Controller
 {
-    public function index(){
-        $batas = 4;
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    public function index()
+    {
+        $batas  = 4;
         $galeri = Galeri::orderBy('id','desc')->paginate($batas);
-        $no = $batas * ($galeri->currentPage() - 1);
+        $no     = $batas * ($galeri->currentPage() - 1);
         return view('galeri.galeri', compact(
             'galeri',
             'no'));
-        }
+    }
     
-    public function create(){
+    public function create()
+    {
         $buku = Buku::all();
         return view('galeri.create', compact('buku'));
-        }    
+    }    
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $this->validate($request,[
             'nama_galeri'=>'required',
             'keterangan'=>'required',
@@ -40,7 +45,6 @@ class GaleriController extends Controller
         
         $galeri->galeri_seo  = Str::slug($request->judul);
 
-
         $foto       = $request->foto;
         $namafile   = time().'.'.$foto->getClientOriginalExtension();
 
@@ -50,24 +54,25 @@ class GaleriController extends Controller
         $galeri->foto = $namafile;
         $galeri->save();
         return redirect('/galeri')->with('success_added', 'Galeri Buku berhasil disimpan');
-        }
+    }
+
     //fungsi hapus galeri
-    public function destroy($id){
+    public function destroy($id)
+    {
         $galeri = Galeri::find($id);
         $galeri->delete();
         return redirect('/galeri')->with('success_deleted','Galeri Buku Berhasil Dihapus');
-        }
+    }
+
     //fungsi edit galeri
     public function edit($id){
         $galeri = Galeri::find($id);
-        $buku = Buku::all();
-        return view('galeri.edit', compact(
-            'galeri',
-            'buku'
-        ));
-        }
+        $buku   = Buku::all();
+        return view('galeri.edit', compact('galeri','buku'));
+    }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $this->validate($request,[
             'nama_galeri'   => 'required|string',
             'keterangan'    => 'required|string',
@@ -91,8 +96,5 @@ class GaleriController extends Controller
         $galeri->foto = $namafile;
         $galeri->update();
         return redirect('/galeri')->with('success_updated','Galeri Buku Berhasil Diupdate');
-    }
-    public function __construct(){
-        $this->middleware('admin');
     }
 }

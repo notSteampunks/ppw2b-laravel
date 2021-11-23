@@ -5,9 +5,9 @@
     <a href="/other">Other</a>
     <a href="/buku">Buku</a>
     @if(Auth::check() && Auth::user()->level == 'admin')
-    <a href="/user"> Data User</a>
+        <a href="/user"> Data User</a>
     @endif
     @if(Auth::check() && Auth::user()->level == 'admin')
-    <a href="/galeri">Galeri</a>
+        <a href="/galeri">Galeri</a>
     @endif
 </div>

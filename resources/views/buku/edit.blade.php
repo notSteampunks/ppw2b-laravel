@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>Edit Buku</h2>
+<h2>Edit Buku</h2>
     @if (count($errors) > 0)
     <ul class="alert alert-danger">
         @foreach ($errors->all() as $error)
@@ -35,4 +35,5 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a class="btn btn-danger" href="/buku">Batal</a>
     </form>
+    
 @endsection

@@ -1,7 +1,9 @@
 @extends('layout.master')
 
 @section('content')
+
 <h2>Edit Galeri</h2>
+
 <form action="{{ route('galeri.update', $galeri->id) }}" method="post" enctype="multipart/form-data">
     @csrf
         <div class="form-group">
@@ -30,4 +32,5 @@
             <a href="/galeri" class="btn btn-warning"> Batal </a>
         </div>
 </form>
+
 @endsection

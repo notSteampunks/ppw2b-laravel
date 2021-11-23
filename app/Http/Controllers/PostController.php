@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function komentar(Request $request, $id){
+    public function komentar(Request $request, $id)
+    {
     $buku = Buku::find($id);
-    
-    $post = new Post;
+
+    $post           = new Post;
     $post->user_id  = Auth::user()->id;
     $post->book_id  = $buku->id;
     $post->comment  = $request->comment;

@@ -14,8 +14,10 @@ class Admin
      * @return mixed
      */
     //Membuat Middleware Admin
-    public function handle($request, Closure $next){
-        if(!(Auth::user()->level == 'admin')){
+    public function handle($request, Closure $next)
+    {
+        if(!(Auth::user()->level == 'admin'))
+        {
             return redirect()->back();
         }
         return $next($request);
